@@ -12,7 +12,7 @@
  
  
 function [C]=CCS(x,y,lag,tau,dim,thresh)
- 
+
 %Estimates signal roughness and sets threshold
 if nargin<6
     roughness=max(std(x(2:end)-x(1:end-1))/std(x),std(y(2:end)-y(1:end-1))/std(y));
@@ -56,6 +56,7 @@ for i=0:Le-1
     Xdiagstd(i+1)=std(diag(dX,i));
     Ydiagstd(i+1)=std(diag(dY,i));
 end
+
 tmask=min(find(Xdiagstd>=nanmean(Xdiagstd),1),find(Ydiagstd>=nanmean(Ydiagstd),1));
 mask=triu(ones(Le),tmask);
 sm=numel(find(mask));
@@ -63,6 +64,8 @@ sm=numel(find(mask));
 %Flattens and sorts the distance matrices
 yflat=reshape(dY(mask==1),sm,1);
 xflat=reshape(dX(mask==1),sm,1);
+
+
 [~,idxs]=sort(xflat);
 [~,idys]=sort(yflat);
 rank=[1:sm].'/sm;

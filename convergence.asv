@@ -22,7 +22,7 @@ T=1+(dim-1)*tau;
 Lmin=2*T;
 Lmax=length(x);
 
-points=round(linspace(Lmin,Lmax,numpoints))';
+points=linspace(Lmin,Lmax,numpoints);
 C=zeros(numpoints,2);
 
 for i=1:numpoints
